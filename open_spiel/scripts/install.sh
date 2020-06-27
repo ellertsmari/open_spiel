@@ -41,7 +41,7 @@ git --version 2>&1 >/dev/null
 GIT_IS_AVAILABLE=$?
 if [ $GIT_IS_AVAILABLE -ne 0 ]; then #...
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    apt-get install git
+    apt-get -y install git
   elif [[ "$OSTYPE" == "darwin"* ]]; then  # Mac OSX
     brew install git
   else
@@ -118,7 +118,7 @@ if [[ ${BUILD_WITH_JULIA:-"OFF"} == "ON" ]]; then
     # Julia installed needs wget, make sure it's accessible.
     if [[ "$OSTYPE" == "linux-gnu" ]]
     then
-      [[ -x `which wget` ]] || apt-get install wget
+      [[ -x `which wget` ]] || apt-get -y install wget
     elif [[ "$OSTYPE" == "darwin"* ]]
     then
       [[ -x `which wget` ]] || brew install wget
@@ -159,7 +159,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   else
     echo "System wide packages missing. Installing them..."
     apt-get update
-    apt-get install $EXT_DEPS
+    apt-get install -y $EXT_DEPS
   fi
 
   if [[ "$TRAVIS" ]]; then
