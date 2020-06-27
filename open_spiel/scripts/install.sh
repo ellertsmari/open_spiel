@@ -41,7 +41,7 @@ git --version 2>&1 >/dev/null
 GIT_IS_AVAILABLE=$?
 if [ $GIT_IS_AVAILABLE -ne 0 ]; then #...
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    sudo apt-get install git
+    apt-get install git
   elif [[ "$OSTYPE" == "darwin"* ]]; then  # Mac OSX
     brew install git
   else
@@ -118,7 +118,7 @@ if [[ ${BUILD_WITH_JULIA:-"OFF"} == "ON" ]]; then
     # Julia installed needs wget, make sure it's accessible.
     if [[ "$OSTYPE" == "linux-gnu" ]]
     then
-      [[ -x `which wget` ]] || sudo apt-get install wget
+      [[ -x `which wget` ]] || apt-get install wget
     elif [[ "$OSTYPE" == "darwin"* ]]
     then
       [[ -x `which wget` ]] || brew install wget
@@ -158,12 +158,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo -e "\e[33mSystem wide packages already installed, skipping their installation.\e[0m"
   else
     echo "System wide packages missing. Installing them..."
-    sudo apt-get update
-    sudo apt-get install $EXT_DEPS
+    apt-get update
+    apt-get install $EXT_DEPS
   fi
 
   if [[ "$TRAVIS" ]]; then
-    sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${OS_PYTHON_VERSION} 10
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${OS_PYTHON_VERSION} 10
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then  # Mac OSX
   [[ -x `which realpath` ]] || brew install coreutils || echo "** Warning: failed 'brew install coreutils' -- continuing"
